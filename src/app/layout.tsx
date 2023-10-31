@@ -1,16 +1,13 @@
-import type { Metadata } from "next"
+"use client"
+
 import { Hanken_Grotesk } from "next/font/google"
 import "./globals.css"
 import "@radix-ui/themes/styles.css"
 import { Container, Theme } from "@radix-ui/themes"
 import Navigation from "@/components/Navigation"
+import { SessionProvider } from "next-auth/react"
 
 const hkGrotesk = Hanken_Grotesk({ subsets: ["latin"] })
-
-export const metadata: Metadata = {
-  title: "Ecommerce",
-  description: "Ecommer site using Nextjs 13!",
-}
 
 export default function RootLayout({
   children,
@@ -21,12 +18,14 @@ export default function RootLayout({
     <html lang='en'>
       <body className={hkGrotesk.className}>
         <Theme>
-          <div className='flex flex-col min-h-screen'>
-            <div className='flex-1'>
-              <Navigation />
-              <Container>{children}</Container>
+          <SessionProvider>
+            <div className='flex flex-col min-h-screen'>
+              <div className='flex-1'>
+                <Navigation />
+                <Container>{children}</Container>
+              </div>
             </div>
-          </div>
+          </SessionProvider>
         </Theme>
       </body>
     </html>
