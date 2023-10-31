@@ -21,8 +21,11 @@ import {
   Store,
 } from "lucide-react"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 
 function Navigation() {
+  const { status, data } = useSession()
+
   const PreNav = () => {
     return (
       <Flex className='bg-offwhite p-2'>
@@ -104,14 +107,23 @@ function Navigation() {
             <Box>
               <div className='flex items-center'>
                 <Box>
-                  <Flex>
-                    <User color='#008ECC' />
-                    <Link
-                      href='/auth/login'
-                      className='text-gray-500 ml-1 font-medium'
-                    >
-                      Login
-                    </Link>
+                  <Flex align='center'>
+                    {status === "unauthenticated" ? (
+                      <>
+                        <User color='#008ECC' />
+                        <Link
+                          href='/auth/login'
+                          className='text-gray-500 ml-1 font-medium'
+                        >
+                          Login
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <User className='mr-2' size={18} />
+                        <p className='font-medium'>{data?.user?.name}</p>
+                      </>
+                    )}
                   </Flex>
                 </Box>
                 <Separator orientation='vertical' className='mx-4' />
