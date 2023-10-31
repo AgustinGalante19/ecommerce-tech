@@ -9,6 +9,8 @@ import {
   Strong,
   TextField,
   IconButton,
+  DropdownMenu,
+  Button,
 } from "@radix-ui/themes"
 import {
   MapPin,
@@ -19,9 +21,11 @@ import {
   User,
   ShoppingCart,
   Store,
+  ChevronDown,
+  LogOut,
 } from "lucide-react"
 import Link from "next/link"
-import { useSession } from "next-auth/react"
+import { signOut, useSession } from "next-auth/react"
 
 function Navigation() {
   const { status, data } = useSession()
@@ -119,10 +123,28 @@ function Navigation() {
                         </Link>
                       </>
                     ) : (
-                      <>
-                        <User className='mr-2' size={18} />
-                        <p className='font-medium'>{data?.user?.name}</p>
-                      </>
+                      <DropdownMenu.Root>
+                        <DropdownMenu.Trigger>
+                          <Button variant='soft'>
+                            {data?.user?.name}
+                            <ChevronDown />
+                          </Button>
+                        </DropdownMenu.Trigger>
+                        <DropdownMenu.Content>
+                          <DropdownMenu.Item color='red'>
+                            <Button
+                              variant='ghost'
+                              className='hover:text-white hover:cursor-pointer transition-colors'
+                              onClick={() => signOut()}
+                            >
+                              <Flex align='center' gap='2'>
+                                Logout
+                                <LogOut className='ml-2' size={16} />
+                              </Flex>
+                            </Button>
+                          </DropdownMenu.Item>
+                        </DropdownMenu.Content>
+                      </DropdownMenu.Root>
                     )}
                   </Flex>
                 </Box>
