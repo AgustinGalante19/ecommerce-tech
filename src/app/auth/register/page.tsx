@@ -8,10 +8,12 @@ import { useRouter } from "next/navigation"
 import { ChangeEvent, FormEvent, useState } from "react"
 import Link from "next/link"
 import ErrorDialog from "@/shared/components/ErrorDialog"
+import api from "@/api"
 
 function Register() {
   const [isPasswordShowed, setIsPasswordShowed] = useState(false)
   const { push } = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
 
   const {
     changeContent,
@@ -28,19 +30,19 @@ function Register() {
   })
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    setIsLoading(true)
     e.preventDefault()
-    signIn("credentials", {
-      ...formData,
-      redirect: false,
-    }).then((res) => {
-      if (!res?.ok && res?.error) {
-        changeContent({
-          title: "Validation error",
-          message: res?.error,
+    api.post<ApiResponse<boolean>>("/auth/register", formData).then((res) => {
+      if (res.data.result === "ok") {
+        signIn("credentials", {
+          ...formData,
+          redirect: false,
+        }).then((authRes) => {
+          if(authRes?.ok){
+            push("/")
+          }
         })
-        return openErrorDialog()
       }
-      push("/")
     })
   }
 
@@ -151,8 +153,12 @@ function Register() {
           </p>
         </div>
         <div className='mt-4 mx-auto'>
-          <Button className='w-full hover:cursor-pointer' color='cyan'>
-            Login
+          <Button
+            className='w-full hover:cursor-pointer'
+            color='cyan'
+            disabled={isLoading}
+          >
+            Register
           </Button>
         </div>
       </form>
