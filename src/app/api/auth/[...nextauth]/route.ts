@@ -4,6 +4,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter"
 
 import CredentialsProvider from "next-auth/providers/credentials"
 import client from "@/libs/prisma"
+import compare from "@/libs/crypto/compare"
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(client),
@@ -11,11 +12,34 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {
-        username: { label: "Username", type: "text" },
+        email: { label: "Email", type: "text" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        return null
+        if (!credentials?.email && !credentials?.password) {
+          throw new Error("Credentials are required")
+        }
+
+        const user = await client.user.findUnique({
+          where: {
+            email: credentials.email,
+          },
+        })
+
+        if (!user) {
+          throw new Error("That user doesn't exists")
+        }
+
+        const isPasswordCorrect = await compare(
+          credentials.password,
+          user.password
+        )
+
+        if (!isPasswordCorrect) {
+          throw new Error("Invalid password")
+        }
+
+        return user
       },
     }),
   ],
