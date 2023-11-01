@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className='my-4'>
       <Flex
-        className='bg-blue-950 rounded-2xl p-8 max-md:rounded-none'
+        className='bg-blue-950 rounded-2xl p-8 max-sm:p-1 max-md:rounded-none'
         justify='between'
       >
         <Box className='flex flex-col '>

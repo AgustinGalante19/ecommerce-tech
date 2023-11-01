@@ -131,7 +131,7 @@ function Navigation() {
                     {status === "authenticated" ? (
                       <button
                         onClick={() => signOut()}
-                        className='flex gap-3 justify-between bg-blue-400 p-2 w-full'
+                        className='flex gap-3 items-center justify-between  w-full'
                       >
                         <span>Logout</span>
                         <LogOut size={16} />
