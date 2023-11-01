@@ -10,6 +10,7 @@ import ErrorDialog from "@/shared/components/ErrorDialog"
 import { useRouter } from "next/navigation"
 
 function Form() {
+  const [isLoading, setIsLoading] = useState(false)
   const [isPasswordShowed, setIsPasswordShowed] = useState(false)
   const { push } = useRouter()
 
@@ -27,6 +28,7 @@ function Form() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setIsLoading(true)
     signIn("credentials", {
       ...formData,
       redirect: false,
@@ -36,8 +38,10 @@ function Form() {
           title: "Validation error",
           message: res?.error,
         })
+        setIsLoading(false)
         return openErrorDialog()
       }
+      setIsLoading(false)
       push("/")
     })
   }
@@ -111,7 +115,11 @@ function Form() {
           </p>
         </div>
         <div className='mt-4 mx-auto'>
-          <Button className='w-full hover:cursor-pointer' color='cyan'>
+          <Button
+            className='w-full hover:cursor-pointer'
+            color='cyan'
+            disabled={isLoading}
+          >
             Login
           </Button>
         </div>
