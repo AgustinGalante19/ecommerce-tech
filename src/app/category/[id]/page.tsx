@@ -48,7 +48,7 @@ function CategoryById() {
   }
 
   return (
-    <div>
+    <div className='mb-8'>
       <header className='bg-primary p-16'>
         {isLoading ? (
           <ContentLoader

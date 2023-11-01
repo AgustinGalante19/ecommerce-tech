@@ -7,6 +7,7 @@ import { Container, Theme } from "@radix-ui/themes"
 import Navigation from "@/components/Navigation"
 import { SessionProvider } from "next-auth/react"
 import NextTopLoader from "nextjs-toploader"
+import Footer from "@/components/Footer"
 
 const hkGrotesk = Hanken_Grotesk({ subsets: ["latin"] })
 
@@ -26,6 +27,7 @@ export default function RootLayout({
                 <Navigation />
                 <Container>{children}</Container>
               </div>
+              <Footer />
             </div>
           </SessionProvider>
         </Theme>
