@@ -67,7 +67,7 @@ function CategoryById() {
           </h2>
         )}
       </header>
-      <div className='bg-offwhite px-2 py-4'>
+      <div className='bg-offwhite'>
         {isLoading
           ? [1, 2, 3, 4].map((e) => (
               <div className='border-y bg-white p-2' key={e}>
@@ -75,7 +75,10 @@ function CategoryById() {
               </div>
             ))
           : productsData.map((product) => (
-              <div className='border-y bg-white p-2' key={product.productId}>
+              <div
+                className='border bg-white p-2 hover:text-primary transition-colors'
+                key={product.productId}
+              >
                 <Link href={`/product/${product.productId}`}>
                   <Flex gap='1' align='center'>
                     <Image
@@ -84,13 +87,13 @@ function CategoryById() {
                       width={150}
                       height={150}
                     />
-                    <Box>
+                    <Box className='ml-2'>
                       <Text as='p' size='4' weight='medium'>
                         {product.name}
                       </Text>
                       <div className='my-2'>
                         <Text as='span' size='6' weight='bold'>
-                          $ {product.price}
+                          ${product.price}
                         </Text>
                       </div>
                       <Text as='p' size='2' color='gray'>
@@ -106,33 +109,3 @@ function CategoryById() {
   )
 }
 export default CategoryById
-/* 
-
-{productsData.map((product) => (
-          <div className='border-y bg-white p-2' key={product.productId}>
-            <Link href={`/product/${product.productId}`}>
-              <Flex gap='1' align='center'>
-                <Image
-                  src={product.images[0]}
-                  alt={`${product.name} image`}
-                  width={150}
-                  height={150}
-                />
-                <Box>
-                  <Text as='p' size='4' weight='medium'>
-                    {product.name}
-                  </Text>
-                  <div className='my-2'>
-                    <Text as='span' size='6' weight='bold'>
-                      $ {product.price}
-                    </Text>
-                  </div>
-                  <Text as='p' size='2' color='gray'>
-                    {product.description}
-                  </Text>
-                </Box>
-              </Flex>
-            </Link>
-          </div>
-        ))}
-*/
