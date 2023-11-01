@@ -1,12 +1,7 @@
 import client from "@/libs/prisma"
 import randomIndex from "@/libs/randomIndex"
-import { Product } from "@prisma/client"
+import TResponse from "@/types/InitialDataResponse"
 import { NextResponse } from "next/server"
-
-interface TResponse {
-  category: string
-  products: Product[]
-}
 
 export async function GET(): Promise<NextResponse<ApiResponse<TResponse>>> {
   const categories = await client.category.findMany()
@@ -26,6 +21,10 @@ export async function GET(): Promise<NextResponse<ApiResponse<TResponse>>> {
   const result = await Promise.all(promises)
 
   const data = result.map((item) => ({
+    catId:
+      categories
+        .filter((cat) => cat.categoryId === item.at(0)?.productCategoryId)
+        .at(0)?.categoryId ?? "",
     category:
       categories
         .filter((cat) => cat.categoryId === item.at(0)?.productCategoryId)
