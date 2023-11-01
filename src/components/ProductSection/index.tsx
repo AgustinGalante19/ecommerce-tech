@@ -21,7 +21,7 @@ function ProductSection({ products, title, category }: Props) {
           </a>
           <span className='w-full h-1 mt-1 bg-blue-400 flex' />
         </h3>
-        <ul className='product-list max-xl:grid-cols-2 max-sm:grid-cols-1  mt-8'>
+        <ul className='product-list max-xl:grid-cols-2 max-sm:grid-cols-1 mt-8'>
           {products.slice(0, 4).map((product) => {
             return <ProductItem product={product} key={product.productId} />
           })}

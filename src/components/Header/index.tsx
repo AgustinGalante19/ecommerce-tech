@@ -4,7 +4,10 @@ import Image from "next/image"
 function Header() {
   return (
     <header className='my-4'>
-      <Flex className='bg-blue-950 rounded-2xl p-8' justify='between'>
+      <Flex
+        className='bg-blue-950 rounded-2xl p-8 max-md:rounded-none'
+        justify='between'
+      >
         <Box className='flex flex-col '>
           <Box className='my-auto text-white'>
             <Text size='6' weight='medium'>
@@ -22,7 +25,7 @@ function Header() {
             </Text>
           </Box>
         </Box>
-        <Box>
+        <Box className='max-md:hidden'>
           <Image
             src='/smartwatch.png'
             width={280}

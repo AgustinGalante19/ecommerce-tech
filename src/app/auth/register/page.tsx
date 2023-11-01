@@ -38,7 +38,7 @@ function Register() {
           ...formData,
           redirect: false,
         }).then((authRes) => {
-          if(authRes?.ok){
+          if (authRes?.ok) {
             push("/")
           }
         })
