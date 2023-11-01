@@ -13,7 +13,7 @@ async function Categories() {
   return (
     <div className='py-4 border-b border-[#EDEDED]'>
       <Container>
-        <Flex gap='4'>
+        <Flex gap='4' wrap='wrap'>
           {categoryList.data.map((cat) => (
             <CategoryItem category={cat} key={cat.categoryId} />
           ))}
