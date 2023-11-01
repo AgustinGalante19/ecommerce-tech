@@ -17,7 +17,6 @@ async function Home() {
       <Header />
       {initialData.data.map((element, index) => {
         if (element.category !== "") {
-          console.log(element)
           return (
             <ProductSection
               key={`${element.products[0].name} - ${index}`}
