@@ -3,6 +3,7 @@ import api from "."
 
 export const useCases = {
   products: {
+    randomProducts: () => api.get("/product/initialData"),
     getByCatName: (catName: string) =>
       api.get<ApiResponse<Product>>("/product/byCatName", {
         params: {

@@ -4,7 +4,7 @@ import ProductItem from "./ProductItem"
 interface Props {
   title: string
   products: Product[]
-  category: string
+  category: { catId: string; label: string }
 }
 
 function ProductSection({ products, title, category }: Props) {
@@ -15,9 +15,9 @@ function ProductSection({ products, title, category }: Props) {
           {title}
           <a
             className='text-primary hover:text-blue-400 transition-colors'
-            href={`/category/${category}`}
+            href={`/category/${category.catId}`}
           >
-            {category}
+            {category.label}
           </a>
           <span className='w-full h-1 mt-1 bg-blue-400 flex' />
         </h3>

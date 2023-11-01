@@ -2,36 +2,33 @@ import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
 import { useCases } from "@/api/useCases"
+import TResponse from "@/types/InitialDataResponse"
 
 async function getInitialItems() {
-  const gpusResponse = await useCases.products.getByCatId(
-    "653a8233bc572e1c316fde01"
-  )
-  const phonesResponse = await useCases.products.getByCatId(
-    "653c42b7a2181dc2e5da291d"
-  )
-  return {
-    phones: phonesResponse.data,
-    gpus: gpusResponse.data,
-  }
+  const initialData = await useCases.products.randomProducts()
+  return initialData.data
 }
 
 async function Home() {
-  const { gpus, phones } = await getInitialItems()
+  const initialData: ApiResponse<TResponse> = await getInitialItems()
   return (
     <div>
       <Categories />
       <Header />
-      <ProductSection
-        products={phones.data}
-        title='Grab the best deal on '
-        category='Smartphones'
-      />
-      <ProductSection
-        products={gpus.data}
-        title='Make a gift to yourself buying a '
-        category='GPU'
-      />
+      {initialData.data.map((element, index) => {
+        if (element.category !== "") {
+          console.log(element)
+          return (
+            <ProductSection
+              key={`${element.products[0].name} - ${index}`}
+              products={element.products}
+              title='Grab the best deal on '
+              category={{ label: element.category, catId: element.catId }}
+            />
+          )
+        }
+        return null
+      })}
     </div>
   )
 }
