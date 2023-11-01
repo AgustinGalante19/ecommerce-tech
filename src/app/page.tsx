@@ -1,11 +1,15 @@
 import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
-import getProductByCategory from "@/service/getProductByCategory"
+import { useCases } from "@/api/useCases"
 
 async function getInitialItems() {
-  const gpusResponse = await getProductByCategory("653a8233bc572e1c316fde01")
-  const phonesResponse = await getProductByCategory("653c42b7a2181dc2e5da291d")
+  const gpusResponse = await useCases.products.getByCatId(
+    "653a8233bc572e1c316fde01"
+  )
+  const phonesResponse = await useCases.products.getByCatId(
+    "653c42b7a2181dc2e5da291d"
+  )
   return {
     phones: phonesResponse.data,
     gpus: gpusResponse.data,
