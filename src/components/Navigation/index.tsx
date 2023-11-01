@@ -8,7 +8,6 @@ import {
   Separator,
   Strong,
   TextField,
-  IconButton,
   DropdownMenu,
   Button,
 } from "@radix-ui/themes"
@@ -16,7 +15,6 @@ import {
   MapPin,
   Truck,
   BadgePercent,
-  AlignJustify,
   Search,
   User,
   ShoppingCart,
@@ -32,65 +30,71 @@ function Navigation() {
 
   const PreNav = () => {
     return (
-      <Flex className='bg-offwhite p-2'>
-        <Container>
-          <Flex justify='between' align='center'>
-            <Box>
-              <Text size='1' className='text-gray-500'>
-                Welcome to my ecommerce webpage
-              </Text>
+      <Container className='bg-offwhite p-2'>
+        <Flex justify='between' align='center'>
+          <Box>
+            <Text size='1' className='text-gray-500'>
+              Welcome to my ecommerce webpage
+            </Text>
+          </Box>
+          <Flex>
+            <Box className='mx-4'>
+              <Flex>
+                <MapPin size={16} className='mr-1' color='#008ECC' />
+                <Text size='1' className='text-gray-500'>
+                  Deliver to your <Strong>location</Strong>!
+                </Text>
+              </Flex>
             </Box>
-            <Flex>
-              <Box className='mx-4'>
-                <Flex>
-                  <MapPin size={16} className='mr-1' color='#008ECC' />
-                  <Text size='1' className='text-gray-500'>
-                    Deliver to your <Strong>location</Strong>!
-                  </Text>
-                </Flex>
-              </Box>
-              <Separator orientation='vertical' />
-              <Box className='mx-4'>
-                <Flex>
-                  <Truck size={16} className='mr-1' color='#008ECC' />
-                  <Text size='1' className='text-gray-500'>
-                    You can <Strong>track</Strong> your order
-                  </Text>
-                </Flex>
-              </Box>
-              <Separator orientation='vertical' />
-              <Box className='mx-4'>
-                <Flex>
-                  <BadgePercent size={16} className='mr-1' color='#008ECC' />
-                  <Text size='1' className='text-gray-500'>
-                    Amazing <Strong>offers</Strong>
-                  </Text>
-                </Flex>
-              </Box>
-            </Flex>
+            <Separator orientation='vertical' />
+            <Box className='mx-4'>
+              <Flex>
+                <Truck size={16} className='mr-1' color='#008ECC' />
+                <Text size='1' className='text-gray-500'>
+                  You can <Strong>track</Strong> your order
+                </Text>
+              </Flex>
+            </Box>
+            <Separator orientation='vertical' />
+            <Box className='mx-4'>
+              <Flex>
+                <BadgePercent size={16} className='mr-1' color='#008ECC' />
+                <Text size='1' className='text-gray-500'>
+                  Amazing <Strong>offers</Strong>
+                </Text>
+              </Flex>
+            </Box>
           </Flex>
-        </Container>
-      </Flex>
+        </Flex>
+      </Container>
     )
   }
 
   return (
     <nav className='flex flex-col border-b border-[#EDEDED]'>
-      <PreNav />
+      <div className='max-sm:hidden'>
+        <PreNav />
+      </div>
       <Flex className='bg-white p-3'>
-        <Container>
+        <Box className='w-[1136px] mx-auto'>
           <Flex align='center' justify='between'>
             <Box>
-              <Flex align='center' gap='2'>
-                <div className='bg-secondary p-2 rounded-md '>
-                  <Store color='#008ECC' />
-                </div>
-                <Text size='5' weight='bold' className='text-primary'>
-                  <Link href='/'>Ecommerce</Link>
-                </Text>
-              </Flex>
+              <Link href='/'>
+                <Flex align='center' gap='2'>
+                  <div className='bg-secondary p-2 rounded-md '>
+                    <Store color='#008ECC' />
+                  </div>
+                  <Text
+                    size='5'
+                    weight='bold'
+                    className='text-primary max-sm:hidden'
+                  >
+                    Ecommerce
+                  </Text>
+                </Flex>
+              </Link>
             </Box>
-            <Box className='w-[512px]'>
+            <Box className='w-[40%]'>
               <TextField.Root className='bg-secondary rounded'>
                 <TextField.Slot>
                   <Search size={16} />
@@ -98,17 +102,54 @@ function Navigation() {
                 <TextField.Input
                   color='blue'
                   variant='soft'
-                  placeholder='Search the docs…'
+                  placeholder='Search products…'
                   size='3'
                 />
-                <TextField.Slot pr='3'>
-                  <IconButton size='2' variant='ghost'>
-                    <AlignJustify size={16} />
-                  </IconButton>
-                </TextField.Slot>
               </TextField.Root>
             </Box>
-            <Box>
+            <Box className='max-sm:block hidden'>
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger>
+                  <Button variant='soft' className='hover:cursor-pointer'>
+                    {data?.user?.name}
+                    <ChevronDown />
+                  </Button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content>
+                  <DropdownMenu.Item>
+                    <Link
+                      className='hover:cursor-pointer transition-colors flex justify-between w-full'
+                      href='/cart'
+                    >
+                      <span>Cart</span>
+                      <ShoppingCart size={16} />
+                    </Link>
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item
+                    color={status === "authenticated" ? "red" : "blue"}
+                  >
+                    {status === "authenticated" ? (
+                      <button
+                        onClick={() => signOut()}
+                        className='flex gap-3 justify-between bg-blue-400 p-2 w-full'
+                      >
+                        <span>Logout</span>
+                        <LogOut size={16} />
+                      </button>
+                    ) : (
+                      <Link
+                        className='hover:cursor-pointer transition-colors flex justify-between w-full gap-2'
+                        href='/auth/login'
+                      >
+                        <span>Login</span>
+                        <User size={16} />
+                      </Link>
+                    )}
+                  </DropdownMenu.Item>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
+            </Box>
+            <Box className='max-sm:hidden'>
               <div className='flex items-center'>
                 <Box>
                   <Flex align='center'>
@@ -125,7 +166,10 @@ function Navigation() {
                     ) : (
                       <DropdownMenu.Root>
                         <DropdownMenu.Trigger>
-                          <Button variant='soft'>
+                          <Button
+                            variant='soft'
+                            className='hover:cursor-pointer'
+                          >
                             {data?.user?.name}
                             <ChevronDown />
                           </Button>
@@ -163,7 +207,7 @@ function Navigation() {
               </div>
             </Box>
           </Flex>
-        </Container>
+        </Box>
       </Flex>
     </nav>
   )
