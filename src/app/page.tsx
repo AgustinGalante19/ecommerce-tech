@@ -4,9 +4,19 @@ import ProductSection from "@/components/ProductSection"
 import { useCases } from "@/api/useCases"
 import TResponse from "@/types/InitialDataResponse"
 
-async function getInitialItems() {
-  const initialData = await useCases.products.randomProducts()
-  return initialData.data
+async function getInitialItems(): Promise<ApiResponse<TResponse>> {
+  try {
+    const initialDataRequest = await useCases.serverSide.randomProducts()
+    const response: ApiResponse<TResponse> = await initialDataRequest.json()
+    return response
+  } catch (err) {
+    console.log("error random products", err)
+    return {
+      data: [],
+      error: [],
+      result: "error",
+    }
+  }
 }
 
 async function Home() {

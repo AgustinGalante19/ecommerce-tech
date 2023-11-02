@@ -1,4 +1,5 @@
 import { useCases } from "@/api/useCases"
+import { Category } from "@prisma/client"
 import { Box, Container, Flex, Separator } from "@radix-ui/themes"
 import { Github, Mail } from "lucide-react"
 import Link from "next/link"
@@ -29,14 +30,28 @@ const Links = [
 ]
 const colStyle = "my-4"
 
+async function getCategories(): Promise<ApiResponse<Category>> {
+  try {
+    const categories = await useCases.serverSide.getAllCategories()
+    const response = await categories.json()
+    return response
+  } catch (err) {
+    console.log("error on footer", err)
+    return {
+      data: [],
+      error: [],
+      result: "error",
+    }
+  }
+}
+
 async function Footer() {
-  const categories = await useCases.categories.getAll()
+  const categories = await getCategories()
   return (
     <footer className='bg-primary p-6'>
       <Container>
         <Flex className='mb-4'>
           <p className='text-4xl font-semibold text-white'>Tech-Ecommerce</p>
-          <br />
         </Flex>
         <div>
           <Flex justify='between' wrap='wrap'>
@@ -56,7 +71,7 @@ async function Footer() {
             <Box className={colStyle}>
               <p className='text-white font-medium underline'>Categories</p>
               <ul className='list-disc text-white'>
-                {categories.data.data.map((category) => (
+                {categories.data.map((category) => (
                   <li key={category.categoryId}>
                     <Link
                       href={`/category/${category.categoryId}`}
