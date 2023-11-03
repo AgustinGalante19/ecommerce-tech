@@ -2,8 +2,5 @@
 @tailwind components;
 @tailwind utilities;
 
-.product-list {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(290px, 1fr));
-  gap: 16px;
-}
+
+
