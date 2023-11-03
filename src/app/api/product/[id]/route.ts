@@ -11,8 +11,10 @@ export async function GET(
       where: {
         productId: params.id,
       },
+      include: {
+        category: true,
+      },
     })
-
     if (!product) {
       return NextResponse.json(
         { data: [], error: ["Product not found"], result: "error" },

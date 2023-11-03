@@ -15,20 +15,17 @@ export async function GET(): Promise<NextResponse<ApiResponse<TResponse>>> {
       where: {
         productCategoryId: catId,
       },
+      include: {
+        category: true,
+      },
     })
   })
 
   const result = await Promise.all(promises)
 
   const data = result.map((item) => ({
-    catId:
-      categories
-        .filter((cat) => cat.categoryId === item.at(0)?.productCategoryId)
-        .at(0)?.categoryId ?? "",
-    category:
-      categories
-        .filter((cat) => cat.categoryId === item.at(0)?.productCategoryId)
-        .at(0)?.name ?? "",
+    catId: item.at(0)?.category.categoryId ?? "",
+    category: item.at(0)?.category.name ?? "",
     products: item,
   }))
 
