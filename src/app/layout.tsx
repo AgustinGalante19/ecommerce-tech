@@ -8,6 +8,8 @@ import Navigation from "@/components/Navigation"
 import { SessionProvider } from "next-auth/react"
 import NextTopLoader from "nextjs-toploader"
 import Footer from "@/components/Footer"
+import { useEffect } from "react"
+import { useCartStore } from "@/store/useCartStore"
 
 const hkGrotesk = Hanken_Grotesk({ subsets: ["latin"] })
 
@@ -16,6 +18,13 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const { setCartItems } = useCartStore()
+
+  useEffect(() => {
+    const itemsOnCart = JSON.parse(localStorage.getItem("cart") ?? "[]")
+    setCartItems(itemsOnCart)
+  }, [setCartItems])
+
   return (
     <html lang='en'>
       <body className={hkGrotesk.className}>
