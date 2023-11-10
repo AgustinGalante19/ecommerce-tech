@@ -1,0 +1,6 @@
+.gird-cart {
+  display: grid;
+  grid-template-columns: 1fr .5fr;
+  gap: 20px;
+  margin: 20px 0px;
+}
