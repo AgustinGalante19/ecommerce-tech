@@ -52,8 +52,8 @@ function CartPage() {
   const handleRemoveItem = (item: Product) => {
     removeItem(item)
     const newItems = cartItems.filter((i) => i.productId !== item.productId)
-    localStorage.setItem("cart", JSON.stringify(newItems))
-    delete order[item.name]
+    window.localStorage.setItem("cart", JSON.stringify(newItems))
+    return delete order[item.name]
   }
 
   return (
