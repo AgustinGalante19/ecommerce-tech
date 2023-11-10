@@ -24,9 +24,12 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { signOut, useSession } from "next-auth/react"
+import { useCartStore } from "@/store/useCartStore"
 
 function Navigation() {
   const { status, data } = useSession()
+
+  const { cartItems } = useCartStore()
 
   const PreNav = () => {
     return (
@@ -122,7 +125,11 @@ function Navigation() {
                       href='/cart'
                     >
                       <span>Cart</span>
-                      <ShoppingCart size={16} />
+                      <ShoppingCart
+                        size={16}
+                        color='#008ECC'
+                        fill={cartItems.length > 0 ? "#008ECC" : "#fff"}
+                      />
                     </Link>
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
@@ -194,15 +201,16 @@ function Navigation() {
                 </Box>
                 <Separator orientation='vertical' className='mx-4' />
                 <Box>
-                  <Flex>
-                    <ShoppingCart color='#008ECC' />
-                    <Link
-                      href='/cart'
-                      className='text-gray-500 ml-1 font-medium'
-                    >
-                      Cart
-                    </Link>
-                  </Flex>
+                  <Link
+                    href='/cart'
+                    className='text-gray-500 ml-1 font-medium flex gap-1 hover:text-black transition-colors'
+                  >
+                    <ShoppingCart
+                      color='#008ECC'
+                      fill={cartItems.length > 0 ? "#008ECC" : "#fff"}
+                    />
+                    Cart
+                  </Link>
                 </Box>
               </div>
             </Box>
