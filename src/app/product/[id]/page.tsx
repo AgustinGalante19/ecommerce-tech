@@ -46,12 +46,9 @@ function ProductByID() {
     [cartItems, product.productId]
   )
   const handleClickCartButton = () => {
-    if (isAlreadyOnTheCart) {
-      console.log("is on the cart... removing")
-      return removeItem(product)
-    }
+    if (isAlreadyOnTheCart) return removeItem(product)
     addItem(product)
-    window.localStorage.setItem("cart", JSON.stringify(cartItems))
+    window.localStorage.setItem("cart", JSON.stringify([...cartItems, product]))
   }
 
   return isLoading ? (
