@@ -3,13 +3,14 @@
 import { useCases } from "@/api/useCases"
 import { Product } from "@prisma/client"
 import { Box, Badge, Button } from "@radix-ui/themes"
-import { useParams } from "next/navigation"
+import { useParams, useRouter } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
 import Image from "next/image"
 import productDetailStyles from "@/styles/product-detail.module.css"
-import { Minus, Plus, ShoppingCart } from "lucide-react"
+import { ShoppingCart } from "lucide-react"
 import { useCartStore } from "@/store/useCartStore"
 import Link from "next/link"
+import { useSession } from "next-auth/react"
 
 const INITIAL_STATE = {
   productId: "",
@@ -27,6 +28,8 @@ const INITIAL_STATE = {
 
 function ProductByID() {
   const { id } = useParams()
+  const { push } = useRouter()
+  const { status } = useSession()
 
   const [product, setProduct] = useState<Product>(INITIAL_STATE)
   const { addItem, cartItems, removeItem, setCartItems } = useCartStore()
@@ -46,6 +49,7 @@ function ProductByID() {
     [cartItems, product.productId]
   )
   const handleClickCartButton = () => {
+    if (status === "unauthenticated") return push("/auth/login")
     if (isAlreadyOnTheCart) return removeItem(product)
     addItem(product)
     window.localStorage.setItem("cart", JSON.stringify([...cartItems, product]))
