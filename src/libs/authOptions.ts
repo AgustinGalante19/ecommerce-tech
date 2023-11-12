@@ -44,6 +44,19 @@ export const authOptions: AuthOptions = {
   session: {
     strategy: "jwt",
   },
+  callbacks: {
+    async session({ session }) {
+      if (session.user?.email) {
+        const currentUser = await client.user.findMany({
+          where: {
+            email: session.user.email,
+          },
+        })
+        session.user.id = currentUser[0].id
+      }
+      return session
+    },
+  },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",
 }
