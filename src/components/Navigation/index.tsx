@@ -21,6 +21,7 @@ import {
   Store,
   ChevronDown,
   LogOut,
+  FileText,
 } from "lucide-react"
 import Link from "next/link"
 import { signOut, useSession } from "next-auth/react"
@@ -124,13 +125,27 @@ function Navigation() {
                       className='hover:cursor-pointer transition-colors flex justify-between w-full'
                       href='/cart'
                     >
-                      <span>Cart</span>
+                      <span className="text-primary">Cart</span>
                       <ShoppingCart
                         size={16}
                         color='#008ECC'
                         fill={cartItems.length > 0 ? "#008ECC" : "#fff"}
                       />
                     </Link>
+                  </DropdownMenu.Item>
+                  <DropdownMenu.Item>
+                    <Button
+                      variant='ghost'
+                      className='hover:text-white hover:cursor-pointer transition-colors'
+                      asChild
+                    >
+                      <Flex align='center' gap='2'>
+                        <Link href='/orders' className=' w-full'>
+                          <span>Orders</span>
+                        </Link>
+                        <FileText />
+                      </Flex>
+                    </Button>
                   </DropdownMenu.Item>
                   <DropdownMenu.Item
                     color={status === "authenticated" ? "red" : "blue"}
@@ -182,6 +197,20 @@ function Navigation() {
                           </Button>
                         </DropdownMenu.Trigger>
                         <DropdownMenu.Content>
+                          <DropdownMenu.Item>
+                            <Button
+                              variant='ghost'
+                              className='hover:text-white hover:cursor-pointer transition-colors'
+                              asChild
+                            >
+                              <Flex align='center' gap='2'>
+                                <Link href='/orders' className=' w-full'>
+                                  <span>Orders</span>
+                                </Link>
+                                <FileText />
+                              </Flex>
+                            </Button>
+                          </DropdownMenu.Item>
                           <DropdownMenu.Item color='red'>
                             <Button
                               variant='ghost'
