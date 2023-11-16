@@ -12,6 +12,7 @@ import { useCartStore } from "@/store/useCartStore"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import ContentLoader from "react-content-loader"
+import ProductDetails from "@/types/ProductDetails"
 
 const INITIAL_STATE = {
   productId: "",
@@ -32,7 +33,7 @@ function ProductByID() {
   const { push } = useRouter()
   const { status } = useSession()
 
-  const [product, setProduct] = useState<Product>(INITIAL_STATE)
+  const [product, setProduct] = useState<ProductDetails>(INITIAL_STATE)
   const { addItem, cartItems, removeItem, setCartItems } = useCartStore()
   const [isLoading, setisLoading] = useState(true)
   useEffect(() => {
@@ -56,6 +57,7 @@ function ProductByID() {
     window.localStorage.setItem("cart", JSON.stringify([...cartItems, product]))
   }
 
+  console.log(product)
   return isLoading ? (
     <div
       className={`${productDetailStyles["product-detail"]} mt-8 bg-secondary rounded-md max-w-5xl mx-auto`}

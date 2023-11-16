@@ -1,11 +1,12 @@
 import client from "@/libs/prisma"
+import ProductDetails from "@/types/ProductDetails"
 import { Product } from "@prisma/client"
 import { NextResponse } from "next/server"
 
 export async function GET(
   _: Request,
   { params }: { params: { id: string } }
-): Promise<NextResponse<ApiResponse<Product>>> {
+): Promise<NextResponse<ApiResponse<ProductDetails>>> {
   try {
     const product = await client.product.findUnique({
       where: {
