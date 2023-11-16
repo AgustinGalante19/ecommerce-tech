@@ -39,16 +39,17 @@ model User {
   name          String
   surname       String
   password      String
-  email         String   @unique
+  email         String    @unique
   emailVerified DateTime?
   accounts      Account[]
   sessions      Session[]
 }
 
 model Category {
-  categoryId String    @id @default(auto()) @map("_id") @db.ObjectId
-  name       String
-  Product    Product[]
+  categoryId   String         @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  Product      Product[]
+  ProductOrder ProductOrder[]
 }
 
 model Product {
@@ -60,4 +61,23 @@ model Product {
   description       String
   images            String[]
   features          String[]
+}
+
+model Order {
+  id       String         @id @default(auto()) @map("_id") @db.ObjectId
+  products ProductOrder[]
+  userId   String
+}
+
+model ProductOrder {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  productId  String
+  name       String
+  price      Float
+  quantity   Int
+  userId     String   @db.ObjectId
+  orderId    String   @db.ObjectId
+  order      Order    @relation(fields: [orderId], references: [id])
+  categoryId String   @db.ObjectId
+  category   Category @relation(fields: [categoryId], references: [categoryId])
 }
