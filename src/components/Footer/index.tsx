@@ -1,5 +1,3 @@
-import { useCases } from "@/api/useCases"
-import { Category } from "@prisma/client"
 import { Box, Container, Flex, Separator } from "@radix-ui/themes"
 import { Github, Mail } from "lucide-react"
 import Link from "next/link"
@@ -30,81 +28,32 @@ const Links = [
 ]
 const colStyle = "my-4"
 
-async function getCategories(): Promise<ApiResponse<Category>> {
-  try {
-    const categories = await useCases.serverSide.getAllCategories()
-    const response = await categories.json()
-    return response
-  } catch (err) {
-    console.log("error on footer", err)
-    return {
-      data: [],
-      error: [],
-      result: "error",
-    }
-  }
-}
-
-async function Footer() {
-  const categories = await getCategories()
+function Footer() {
   return (
-    <footer className='bg-primary p-6'>
+    <footer className='bg-primary'>
       <Container>
-        <Flex className='mb-4'>
-          <p className='text-4xl font-semibold text-white'>Tech-Ecommerce</p>
-        </Flex>
         <div>
-          <Flex justify='between' wrap='wrap'>
+          <Flex gap='9' justify='center' wrap='wrap'>
             <Box className={colStyle}>
-              <span className='font-medium underline text-white'>
-                Contact me
-              </span>
-              <ul className='font-medium text-white'>
-                <li className='my-1'>
-                  <Flex align='center' gap='2'>
-                    <Mail size={16} />
-                    agustin.galante.19@outlook.es
-                  </Flex>
-                </li>
-              </ul>
-            </Box>
-            <Box className={colStyle}>
-              <p className='text-white font-medium underline'>Categories</p>
-              <ul className='list-disc text-white'>
-                {categories.data.map((category) => (
-                  <li key={category.categoryId}>
-                    <Link
-                      href={`/category/${category.categoryId}`}
-                      className={linkStyle}
-                    >
-                      {category.name}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </Box>
-            <Box className={colStyle}>
-              <p className='text-white font-medium underline'>
-                Customer Service
+              <p className='text-4xl font-semibold text-white '>
+                Tech-Ecommerce
               </p>
-              <ul className='list-disc text-white'>
-                {Links.map((link) => (
-                  <li key={link.id}>
-                    <Link href={link.href} className={linkStyle}>
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <Flex align='center' gap='2'>
+                <Mail size={16} color="#fff"/>
+                <span className='text-white'>
+                  agustin.galante.19@outlook.es
+                </span>
+              </Flex>
             </Box>
           </Flex>
         </div>
-        <Separator orientation='horizontal' size='4' className='my-4' />
+        <Separator orientation='horizontal' size='4' />
         <Link
           className='text-secondary text-center font-semibold hover:text-white transition-colors'
           href='https://github.com/AgustinGalante19'
+          target='_blank'
         >
-          <Flex align='center' justify='center'>
+          <Flex align='center' justify='center' my="2">
             <div>
               <Github />
             </div>

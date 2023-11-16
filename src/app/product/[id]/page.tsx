@@ -56,8 +56,6 @@ function ProductByID() {
     addItem(product)
     window.localStorage.setItem("cart", JSON.stringify([...cartItems, product]))
   }
-
-  console.log(product)
   return isLoading ? (
     <div
       className={`${productDetailStyles["product-detail"]} mt-8 bg-secondary rounded-md max-w-5xl mx-auto`}
