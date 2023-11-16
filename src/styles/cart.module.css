@@ -1,6 +1,15 @@
-.gird-cart {
+.grid-cart {
   display: grid;
   grid-template-columns: 1fr .5fr;
   gap: 20px;
   margin: 20px 0px;
+}
+
+@media not all and (min-width: 1024px) {
+  .grid-cart {
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    padding: 10px;
+  }
 }
