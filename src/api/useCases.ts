@@ -57,7 +57,7 @@ export const useCases = {
     }) =>
       api.post<ApiResponse<Order>>(
         "/order",
-        { request, total },
+        { products: request, total },
         {
           headers: {
             userId,

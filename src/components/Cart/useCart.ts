@@ -3,7 +3,7 @@ import { useCartStore } from "@/store/useCartStore"
 import AlertProps from "@/types/AlertProps"
 import Order, { OrderRequest } from "@/types/Order"
 import { useSession } from "next-auth/react"
-import { ChangeEvent, useCallback, useEffect, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react"
 
 export default function useCart() {
   const { cartItems, clearCart } = useCartStore()
@@ -53,11 +53,13 @@ export default function useCart() {
     }))
   }
 
-  const totalAmount = cartItems.reduce((acc, item) => {
-    if (order[item.name]?.quantity <= 0) return 0
+  const totalAmount = useMemo(() => {
+    return cartItems.reduce((acc, item) => {
+      if (order[item.name]?.quantity <= 0) return 0
 
-    return acc + item.price * order[item.name]?.quantity
-  }, 0)
+      return acc + item.price * order[item.name]?.quantity
+    }, 0)
+  }, [cartItems, order])
 
   const handleSubmitOrder = async () => {
     const request: OrderRequest[] = Object.keys(order).map((itemKey) => ({
@@ -83,8 +85,13 @@ export default function useCart() {
             type: "success",
           })
           clearCart()
-          globalThis.localStorage.removeItem("cart")
+          return globalThis.localStorage.removeItem("cart")
         }
+        return setShowAlert({
+          isOpen: true,
+          message: response.data.error[0],
+          type: "error",
+        })
       })
       .catch((err) => {
         console.log("error on creating the order", err)

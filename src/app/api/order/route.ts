@@ -1,7 +1,7 @@
 import client from "@/libs/prisma"
 import { OrderRequest } from "@/types/Order"
 import { Order } from "@prisma/client"
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
 import { headers } from "next/headers"
 
 export async function POST(
@@ -20,6 +20,15 @@ export async function POST(
         result: "error",
       })
     }
+
+    if (!products) {
+      return NextResponse.json({
+        data: [],
+        error: ["You must provide a list of products"],
+        result: "error",
+      })
+    }
+
     const newOrder = await client.order.create({
       data: {
         userId: userId,
@@ -64,6 +73,9 @@ export async function GET(): Promise<NextResponse<ApiResponse<Order>>> {
       },
       include: {
         products: true,
+      },
+      orderBy: {
+        createdAt: "desc",
       },
     })
 
