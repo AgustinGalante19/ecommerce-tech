@@ -7,9 +7,11 @@ import { headers } from "next/headers"
 export async function POST(
   request: Request
 ): Promise<NextResponse<ApiResponse<Order>>> {
-  const { products }: { products: OrderRequest[] } = await request.json()
+  const { products, total }: { products: OrderRequest[]; total: number } =
+    await request.json()
   const headersList = headers()
   const userId = headersList.get("userId")
+
   try {
     if (!userId) {
       return NextResponse.json({
@@ -26,6 +28,7 @@ export async function POST(
             data: products,
           },
         },
+        total,
       },
       include: {
         products: true,
@@ -43,9 +46,7 @@ export async function POST(
   }
 }
 
-export async function GET(
-  request: NextRequest
-): Promise<NextResponse<ApiResponse<Order>>> {
+export async function GET(): Promise<NextResponse<ApiResponse<Order>>> {
   const headersList = headers()
   try {
     const userId = headersList.get("userId")
@@ -65,6 +66,8 @@ export async function GET(
         products: true,
       },
     })
+
+    console.log(orders)
     return NextResponse.json({ data: orders, error: [], result: "ok" })
   } catch (err) {
     return NextResponse.json({ data: [], error: [], result: "error" })

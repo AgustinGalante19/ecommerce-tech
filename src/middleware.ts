@@ -8,4 +8,4 @@ export default withAuth({
   },
 })
 
-export const config = { matcher: ["/cart"] }
+export const config = { matcher: ["/cart", "/orders"] }
