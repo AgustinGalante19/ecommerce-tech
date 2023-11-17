@@ -78,8 +78,6 @@ export async function GET(): Promise<NextResponse<ApiResponse<Order>>> {
         createdAt: "desc",
       },
     })
-
-    console.log(orders)
     return NextResponse.json({ data: orders, error: [], result: "ok" })
   } catch (err) {
     return NextResponse.json({ data: [], error: [], result: "error" })
