@@ -1,7 +1,8 @@
-import { Category, Product } from "@prisma/client"
+import { Category, Order, Product } from "@prisma/client"
 import api from "."
 import { API_URL } from "@/libs/API"
 import ProductDetails from "@/types/ProductDetails"
+import { OrderRequest } from "@/types/Order"
 
 export const useCases = {
   serverSide: {
@@ -41,5 +42,27 @@ export const useCases = {
       api.post<ApiResponse<Category>>("/category", { data }),
     destroy: (id: string) =>
       api.delete<ApiResponse<Category>>(`/category/${id}`),
+  },
+  orders: {
+    getAll: (userId: string) =>
+      api.get<ApiResponse<Order>>("/order", { headers: { userId } }),
+    create: ({
+      request,
+      total,
+      userId,
+    }: {
+      request: OrderRequest[]
+      total: number
+      userId: string
+    }) =>
+      api.post<ApiResponse<Order>>(
+        "/order",
+        { request, total },
+        {
+          headers: {
+            userId,
+          },
+        }
+      ),
   },
 }
