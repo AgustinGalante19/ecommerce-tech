@@ -39,10 +39,8 @@ function Footer() {
                 Tech-Ecommerce
               </p>
               <Flex align='center' gap='2'>
-                <Mail size={16} color="#fff"/>
-                <span className='text-white'>
-                  agustin.galante.19@outlook.es
-                </span>
+                <Mail size={16} color='#fff' />
+                <span className='text-white'>agustin.19.galante@gmail.com</span>
               </Flex>
             </Box>
           </Flex>
@@ -53,7 +51,7 @@ function Footer() {
           href='https://github.com/AgustinGalante19'
           target='_blank'
         >
-          <Flex align='center' justify='center' my="2">
+          <Flex align='center' justify='center' my='2'>
             <div>
               <Github />
             </div>

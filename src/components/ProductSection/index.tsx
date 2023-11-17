@@ -22,7 +22,7 @@ function ProductSection({ products, title, category }: Props) {
           <span className='w-full h-1 mt-1 bg-blue-400 flex' />
         </h3>
         <ul
-          className={`flex flex-wrap gap-4 justify-between max-[620px]:justify-center mt-8`}
+          className={`flex flex-wrap gap-6 max-[620px]:justify-center mt-8`}
         >
           {products.slice(0, 4).map((product) => {
             return <ProductItem product={product} key={product.productId} />

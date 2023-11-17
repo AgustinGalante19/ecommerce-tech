@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className='my-4'>
       <Flex
-        className='bg-blue-950 rounded-2xl p-8 max-sm:p-1 max-md:rounded-none'
+        className='bg-blue-950 rounded-2xl p-8 max-sm:px-2 max-sm:py-8 max-xl:rounded-none max-md:rounded-none'
         justify='between'
       >
         <Box className='flex flex-col '>
@@ -15,9 +15,7 @@ function Header() {
             </Text>
             <br />
             <br />
-            <Text size='9' weight='bold'>
-              SMART WEARABLE.
-            </Text>
+            <p className='text-7xl font-bold max-sm:text-5xl'>SMART WEARABLE.</p>
             <br />
             <br />
             <Text size='6' weight='medium'>

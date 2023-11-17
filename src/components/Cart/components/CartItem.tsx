@@ -34,7 +34,7 @@ function CartItem({
           height={50}
           src={item.images[0]}
           alt={item.name}
-          className='mr-2'
+          className='mr-2 w-auto h-auto'
         />
         <p>{item.name}</p>
       </div>
