@@ -2,8 +2,8 @@
 
 import cartStyles from "@/styles/cart.module.css"
 import Alert from "@/shared/components/Alert"
-import PucharseSummary from "@/components/Cart/components/PucharseSummary"
-import CartList from "@/components/Cart/components/CartList"
+import PucharseSummary from "@/components/Cart/PucharseSummary"
+import CartList from "@/components/Cart/CartList"
 import useCart from "@/components/Cart/useCart"
 
 function CartPage() {

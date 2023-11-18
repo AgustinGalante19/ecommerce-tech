@@ -1,7 +1,7 @@
 import { Product } from "@prisma/client"
 import CartItem from "./CartItem"
 import Image from "next/image"
-import CartItemProps from "../CartItemProps"
+import CartItemProps from "./CartItemProps"
 
 interface Props extends CartItemProps {
   cartItems: Product[]

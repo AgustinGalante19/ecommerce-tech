@@ -12,7 +12,7 @@ import { useCartStore } from "@/store/useCartStore"
 import Link from "next/link"
 import { useSession } from "next-auth/react"
 import ContentLoader from "react-content-loader"
-import ProductDetails from "@/types/ProductDetails"
+import ProductDetails from "@/types/ProductWithCategory"
 
 const INITIAL_STATE = {
   productId: "",
