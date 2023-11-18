@@ -4,9 +4,17 @@ import { Category } from "@prisma/client"
 import { API_URL } from "@/libs/API"
 
 async function getCategories() {
-  const request = await fetch(`${API_URL}/category`)
-  const categories: ApiResponse<Category> = await request.json()
-  return categories
+  try {
+    const API = `${API_URL}/category`
+    console.log("API URL: ", API)
+    const request = await fetch(API)
+    const categories: ApiResponse<Category> = await request.json()
+    return categories
+  } catch (err) {
+    return {
+      data: [],
+    }
+  }
 }
 
 async function Categories() {
