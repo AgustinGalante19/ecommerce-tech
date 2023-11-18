@@ -30,8 +30,11 @@ import axios from "axios"
 
   useEffect(() => {
     axios
-      .get<ApiResponse<TResponse>>("/product/initialData")
-      .then((response) => setinitialData(response.data.data))
+      .get<ApiResponse<TResponse>>("/api/product/initialData")
+      .then((response) => {
+        console.log(response.data)
+        setinitialData(response.data.data)
+      })
   }, [])
 
   return (
