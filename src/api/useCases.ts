@@ -1,14 +1,10 @@
 import { Category, Order, Product } from "@prisma/client"
 import api from "."
-import { API_URL } from "@/libs/API"
 import ProductDetails from "@/types/ProductWithCategory"
 import { OrderRequest, OrdersWithProducts } from "@/types/Order"
 import ProductWithCategory from "@/types/ProductWithCategory"
 
 export const useCases = {
-  serverSide: {
-    randomProducts: () => fetch(`${API_URL}/product/initialData`),
-  },
   products: {
     getByCatId: (catId: string) =>
       api.get<ApiResponse<ProductWithCategory>>("/product/byCatId", {
