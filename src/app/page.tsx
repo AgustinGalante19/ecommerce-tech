@@ -1,10 +1,14 @@
+"use client"
+
 import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
 import { useCases } from "@/api/useCases"
 import TResponse from "@/types/InitialDataResponse"
+import { useEffect, useState } from "react"
+import api from "@/api"
 
-async function getInitialItems(): Promise<ApiResponse<TResponse>> {
+/* async function getInitialItems(): Promise<ApiResponse<TResponse>> {
   try {
     const initialDataRequest = await useCases.serverSide.randomProducts()
     const response: ApiResponse<TResponse> = await initialDataRequest.json()
@@ -17,15 +21,23 @@ async function getInitialItems(): Promise<ApiResponse<TResponse>> {
       result: "error",
     }
   }
-}
+} */
 
-async function Home() {
-  const initialData: ApiResponse<TResponse> = await getInitialItems()
+/* async  */ function Home() {
+  /* const initialData: ApiResponse<TResponse> = await getInitialItems() */
+  const [initialData, setinitialData] = useState<TResponse[]>([])
+
+  useEffect(() => {
+    api
+      .get<ApiResponse<TResponse>>("/product/initialData")
+      .then((response) => setinitialData(response.data.data))
+  }, [])
+
   return (
     <div>
       <Categories />
       <Header />
-      {initialData.data.map((element, index) => {
+      {initialData.map((element, index) => {
         if (element.category !== "") {
           return (
             <ProductSection
