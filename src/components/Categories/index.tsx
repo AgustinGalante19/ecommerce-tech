@@ -3,7 +3,7 @@ import CategoryItem from "./CategoryItem"
 import { Category } from "@prisma/client"
 
 async function getCategories() {
-  const request = await fetch("http://localhost:3000/api/category")
+  const request = await fetch("/api/category")
   const categories: ApiResponse<Category> = await request.json()
   return categories
 }
