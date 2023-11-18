@@ -7,6 +7,7 @@ import { useCases } from "@/api/useCases"
 import TResponse from "@/types/InitialDataResponse"
 import { useEffect, useState } from "react"
 import api from "@/api"
+import axios from "axios"
 
 /* async function getInitialItems(): Promise<ApiResponse<TResponse>> {
   try {
@@ -28,7 +29,7 @@ import api from "@/api"
   const [initialData, setinitialData] = useState<TResponse[]>([])
 
   useEffect(() => {
-    api
+    axios
       .get<ApiResponse<TResponse>>("/product/initialData")
       .then((response) => setinitialData(response.data.data))
   }, [])
