@@ -4,7 +4,7 @@ import cartStyles from "@/styles/cart.module.css"
 import Alert from "@/shared/components/Alert"
 import PucharseSummary from "@/components/Cart/PucharseSummary"
 import CartList from "@/components/Cart/CartList"
-import useCart from "@/components/Cart/useCart"
+import useCart from "@/hooks/useCart"
 
 function CartPage() {
   const {
