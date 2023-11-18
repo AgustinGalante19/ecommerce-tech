@@ -1,25 +1,27 @@
 "use client"
 
-import { Order, ProductOrder } from "@prisma/client"
 import dayjs from "dayjs"
 import { FileText, Loader2 } from "lucide-react"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
 import { useCases } from "@/api/useCases"
+import { OrdersWithProducts } from "@/types/Order"
 
 function Orders() {
-  const [orders, setOrders] = useState<Order[]>([])
+  const [orders, setOrders] = useState<OrdersWithProducts[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const { data } = useSession()
   useEffect(() => {
     setIsLoading(true)
-    useCases.orders
-      .getAll(data?.user?.id ?? "")
-      .then((response) => {
-        setOrders(response.data.data)
-      })
-      .catch((err) => console.log("Cannot get orders", err))
-      .finally(() => setIsLoading(false))
+    if (data?.user?.id) {
+      useCases.orders
+        .getAll(data?.user?.id)
+        .then((response) => {
+          setOrders(response.data.data)
+        })
+        .catch((err) => console.log("Cannot get orders", err))
+        .finally(() => setIsLoading(false))
+    }
   }, [data?.user?.id])
 
   return (
@@ -46,7 +48,7 @@ function Orders() {
                     </div>
                     <div>
                       <ul>
-                        {item.products.map((product: ProductOrder) => (
+                        {item.products.map((product) => (
                           <li
                             key={`${item.id}-${product.productId}`}
                             className='text-sm text-gray-500'

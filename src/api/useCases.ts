@@ -2,7 +2,7 @@ import { Category, Order, Product } from "@prisma/client"
 import api from "."
 import { API_URL } from "@/libs/API"
 import ProductDetails from "@/types/ProductDetails"
-import { OrderRequest } from "@/types/Order"
+import { OrderRequest, OrdersWithProducts } from "@/types/Order"
 
 export const useCases = {
   serverSide: {
@@ -45,7 +45,9 @@ export const useCases = {
   },
   orders: {
     getAll: (userId: string) =>
-      api.get<ApiResponse<Order>>("/order", { headers: { userId } }),
+      api.get<ApiResponse<OrdersWithProducts>>("/order", {
+        headers: { userId },
+      }),
     create: ({
       request,
       total,

@@ -1,4 +1,4 @@
-import { Category } from "@prisma/client"
+import { Category, ProductOrder, Order as PrismaOrder } from "@prisma/client"
 
 export default interface Order {
   [key: string]: {
@@ -21,4 +21,8 @@ export interface OrderRequest {
   quantity: number
   userId: string
   categoryId: string
+}
+
+export type OrdersWithProducts = PrismaOrder & {
+  products: ProductOrder[]
 }
