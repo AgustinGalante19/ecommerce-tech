@@ -3,11 +3,11 @@
 import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
-import { useCases } from "@/api/useCases"
+/* import { useCases } from "@/api/useCases" */
 import TResponse from "@/types/InitialDataResponse"
-import { useEffect, useState } from "react"
-import api from "@/api"
-import axios from "axios"
+import { /* useEffect, */ useState } from "react"
+/* import api from "@/api"
+import axios from "axios" */
 
 /* async function getInitialItems(): Promise<ApiResponse<TResponse>> {
   try {
@@ -28,14 +28,14 @@ import axios from "axios"
   /* const initialData: ApiResponse<TResponse> = await getInitialItems() */
   const [initialData, setinitialData] = useState<TResponse[]>([])
 
-  useEffect(() => {
+  /* useEffect(() => {
     axios
       .get<ApiResponse<TResponse>>("/api/product/initialData")
       .then((response) => {
         console.log(response.data)
         setinitialData(response.data.data)
       })
-  }, [])
+  }, []) */
 
   return (
     <div>

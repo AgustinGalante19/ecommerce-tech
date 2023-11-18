@@ -3,7 +3,7 @@ import { useCartStore } from "@/store/useCartStore"
 import ProductWithCategory from "@/types/ProductWithCategory"
 import { useSession } from "next-auth/react"
 import { useParams } from "next/navigation"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { useEffect, useMemo, useState } from "react"
 
 const INITIAL_STATE = {
