@@ -8,7 +8,6 @@ import ProductWithCategory from "@/types/ProductWithCategory"
 export const useCases = {
   serverSide: {
     randomProducts: () => fetch(`${API_URL}/product/initialData`),
-    getAllCategories: () => fetch(`${API_URL}/category`),
   },
   products: {
     getByCatId: (catId: string) =>
