@@ -1,8 +1,9 @@
 import { Category, Order, Product } from "@prisma/client"
 import api from "."
 import { API_URL } from "@/libs/API"
-import ProductDetails from "@/types/ProductDetails"
+import ProductDetails from "@/types/ProductWithCategory"
 import { OrderRequest, OrdersWithProducts } from "@/types/Order"
+import ProductWithCategory from "@/types/ProductWithCategory"
 
 export const useCases = {
   serverSide: {
@@ -10,16 +11,8 @@ export const useCases = {
     getAllCategories: () => fetch(`${API_URL}/category`),
   },
   products: {
-    getByCatName: (catName: string) =>
-      api.get<ApiResponse<Product>>("/product/byCatName", {
-        params: {
-          catName,
-        },
-      }),
-    getByCatId: (
-      catId: string //Todo: Make this endpoint
-    ) =>
-      api.get<ApiResponse<Product>>("/product/byCatId", {
+    getByCatId: (catId: string) =>
+      api.get<ApiResponse<ProductWithCategory>>("/product/byCatId", {
         params: {
           catId,
         },

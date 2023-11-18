@@ -1,5 +1,5 @@
 import client from "@/libs/prisma"
-import ProductDetails from "@/types/ProductDetails"
+import ProductDetails from "@/types/ProductWithCategory"
 import { Product } from "@prisma/client"
 import { NextResponse } from "next/server"
 

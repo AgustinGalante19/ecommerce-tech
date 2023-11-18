@@ -13,6 +13,9 @@ export async function GET(
         where: {
           productCategoryId: catId,
         },
+        include: {
+          category: true,
+        },
       })
       return NextResponse.json({ data: products, error: [], result: "ok" })
     }

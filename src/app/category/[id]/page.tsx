@@ -19,10 +19,7 @@ function CategoryById() {
     const getProducts = async () => {
       setIsLoading(true)
       const products = await useCases.products.getByCatId(id as string)
-      const category = await useCases.categories.getById(
-        products.data.data[0].productCategoryId
-      )
-      setCategoryName(category.data.data[0].name)
+      setCategoryName(products.data.data[0].category.name)
       setProductsData(products.data.data)
       setIsLoading(false)
     }
