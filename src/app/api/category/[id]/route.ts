@@ -63,7 +63,6 @@ export async function DELETE(
       result: "ok",
     })
   } catch (err) {
-    console.log("DELETE Category ", err)
     return NextResponse.json({
       data: [],
       error: ["Something went wrong deleting category"],

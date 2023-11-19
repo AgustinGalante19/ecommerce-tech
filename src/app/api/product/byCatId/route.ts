@@ -1,6 +1,8 @@
+export const dynamic = "force-dynamic"
+
 import client from "@/libs/prisma"
 import { Product } from "@prisma/client"
-import { NextRequest, NextResponse } from "next/server"
+import { type NextRequest, NextResponse } from "next/server"
 
 export async function GET(
   req: NextRequest
