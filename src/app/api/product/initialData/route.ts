@@ -4,7 +4,7 @@ import TResponse from "@/types/InitialDataResponse"
 import { NextResponse } from "next/server"
 
 export async function GET(): Promise<NextResponse<ApiResponse<TResponse>>> {
-  /* const categories = await client.category.findMany()
+  const categories = await client.category.findMany()
 
   const length = categories.length
   const indexes = randomIndex([length, length])
@@ -27,7 +27,7 @@ export async function GET(): Promise<NextResponse<ApiResponse<TResponse>>> {
     catId: item.at(0)?.category.categoryId ?? "",
     category: item.at(0)?.category.name ?? "",
     products: item,
-  })) */
+  }))
 
-  return NextResponse.json({ data: [], error: [], result: "ok" })
+  return NextResponse.json({ data, error: [], result: "ok" })
 }

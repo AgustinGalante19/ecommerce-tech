@@ -30,7 +30,10 @@ export async function GET(
   } catch (err) {
     return NextResponse.json({
       data: [],
-      error: ["Something went wrong on getting products by category"],
+      error: [
+        "Something went wrong on getting products by category",
+        JSON.stringify(err),
+      ],
       result: "error",
     })
   }

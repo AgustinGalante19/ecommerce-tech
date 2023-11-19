@@ -1,11 +1,12 @@
 "use client"
 
+import api from "@/api"
 import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
 /* import { useCases } from "@/api/useCases" */
 import TResponse from "@/types/InitialDataResponse"
-import { /* useEffect, */ useState } from "react"
+import { /* useEffect, */ useEffect, useState } from "react"
 /* import api from "@/api"
 import axios from "axios" */
 
@@ -28,14 +29,11 @@ import axios from "axios" */
   /* const initialData: ApiResponse<TResponse> = await getInitialItems() */
   const [initialData, setinitialData] = useState<TResponse[]>([])
 
-  /* useEffect(() => {
-    axios
-      .get<ApiResponse<TResponse>>("/api/product/initialData")
-      .then((response) => {
-        console.log(response.data)
-        setinitialData(response.data.data)
-      })
-  }, []) */
+  useEffect(() => {
+    api.get<ApiResponse<TResponse>>("/product/initialData").then((response) => {
+      setinitialData(response.data.data)
+    })
+  }, [])
 
   return (
     <div>
