@@ -7,7 +7,7 @@ import ProductWithCategory from "@/types/ProductWithCategory"
 export const useCases = {
   products: {
     getByCatId: (catId: string) =>
-      api.get<ApiResponse<ProductWithCategory>>("/product/byCatId", {
+      api.get<ApiResponse<ProductWithCategory>>("/product", {
         params: {
           catId,
         },

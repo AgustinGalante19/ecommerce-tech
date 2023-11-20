@@ -6,6 +6,14 @@ import ProductList from "@/components/ProductByCategory/ProductList"
 import Header from "@/components/ProductByCategory/Header"
 import useProductByCatID from "@/hooks/useProductsByCatID"
 
+const ProductsLoader = () => {
+  return [1, 2, 3, 4].map((e) => (
+    <div className='border-y bg-white p-2' key={e}>
+      <LoaderItem />
+    </div>
+  ))
+}
+
 function ProductByCategoryID() {
   const { id } = useParams()
 
@@ -18,11 +26,7 @@ function ProductByCategoryID() {
       <Header categoryName={categoryName} isLoading={isLoading} />
       <div className='bg-offwhite'>
         {isLoading ? (
-          [1, 2, 3, 4].map((e) => (
-            <div className='border-y bg-white p-2' key={e}>
-              <LoaderItem />
-            </div>
-          ))
+          <ProductsLoader />
         ) : (
           <ProductList products={productsData} />
         )}
