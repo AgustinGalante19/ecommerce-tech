@@ -3,6 +3,7 @@ import api from "."
 import ProductDetails from "@/types/ProductWithCategory"
 import { OrderRequest, OrdersWithProducts } from "@/types/Order"
 import ProductWithCategory from "@/types/ProductWithCategory"
+import SearchResultType from "@/types/SearchResult"
 
 export const useCases = {
   products: {
@@ -16,6 +17,19 @@ export const useCases = {
       api.get<ApiResponse<ProductDetails>>(`/product/${id}`),
     create: (data: Product) => api.post("/product", { data }),
     destroy: (id: string) => api.delete(`/product/${id}`),
+    search: ({
+      fullData = "false",
+      searchQuery = "",
+    }: {
+      searchQuery: string
+      fullData?: "true" | "false"
+    }) =>
+      api.get<ApiResponse<SearchResultType>>("/product", {
+        params: {
+          fullData,
+          searchQuery,
+        },
+      }),
   },
   categories: {
     getAll: () => api.get<ApiResponse<Category>>("/category"),

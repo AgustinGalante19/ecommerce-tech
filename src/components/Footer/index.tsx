@@ -38,7 +38,7 @@ function Footer() {
               <p className='text-4xl font-semibold text-white '>
                 Tech-Ecommerce
               </p>
-              <Flex align='center' gap='2'>
+              <Flex align='center' justify='center' gap='2'>
                 <Mail size={16} color='#fff' />
                 <span className='text-white'>agustin.19.galante@gmail.com</span>
               </Flex>

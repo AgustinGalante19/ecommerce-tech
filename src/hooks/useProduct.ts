@@ -28,10 +28,12 @@ export default function useProduct() {
   const [product, setProduct] = useState<ProductWithCategory>(INITIAL_STATE)
   const { addItem, cartItems, removeItem, setCartItems } = useCartStore()
   const [isLoading, setisLoading] = useState(true)
+
   useEffect(() => {
     const getProduct = async () => {
       setisLoading(true)
       const product = await useCases.products.getById(id as string)
+
       setProduct(product.data.data[0])
       setisLoading(false)
     }
@@ -39,8 +41,8 @@ export default function useProduct() {
   }, [id, setCartItems])
 
   const isAlreadyOnTheCart = useMemo(
-    () => cartItems.find((e) => e.productId === product.productId),
-    [cartItems, product.productId]
+    () => cartItems.find((e) => e.productId === product?.productId),
+    [cartItems, product?.productId]
   )
   const handleClickCartButton = () => {
     if (status === "unauthenticated") return push("/auth/login")
