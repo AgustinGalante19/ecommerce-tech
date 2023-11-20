@@ -94,24 +94,6 @@ function Navigation() {
                 </Flex>
               </Link>
             </Box>
-            {/* <Box className='w-[40%]'>
-              <Combobox>
-                <Combobox.Input
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}
-                  className='w-full bg-secondary py-1 px-2 rounded-md'
-                />
-                <Combobox.Options className='bg-offwhite border-b border-md p-2 absolute w-[455px]'>
-                  {searchResult.map((result) => (
-                    <Combobox.Option key={result.productId} value={result}>
-                      <Link href={`/search?searchQuery=${searchQuery}`}>
-                        {result.name}
-                      </Link>
-                    </Combobox.Option>
-                  ))}
-                </Combobox.Options>
-              </Combobox>
-            </Box> */}
             <Box className='w-[40%]'>
               <Combobox>
                 <div className='relative mt-1'>
