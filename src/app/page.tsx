@@ -1,45 +1,49 @@
-"use client"
-
+/* import api from "@/api" */
 import api from "@/api"
 import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
-/* import { useCases } from "@/api/useCases" */
 import TResponse from "@/types/InitialDataResponse"
-import { /* useEffect, */ useEffect, useState } from "react"
-/* import api from "@/api"
-import axios from "axios" */
+/* import { useCallback, useEffect, useState } from "react" */
 
-/* async function getInitialItems(): Promise<ApiResponse<TResponse>> {
+async function getInitialData(): Promise<ApiResponse<TResponse>> {
   try {
-    const initialDataRequest = await useCases.serverSide.randomProducts()
-    const response: ApiResponse<TResponse> = await initialDataRequest.json()
+    const request = await fetch(
+      process.env.NEXT_PUBLIC_API_URL + "/product/initialData"
+    )
+    const response: ApiResponse<TResponse> = await request.json()
+    console.log(response)
     return response
   } catch (err) {
-    console.log("error random products", err)
+    console.log("error getting initialData", err)
     return {
       data: [],
       error: [],
       result: "error",
     }
   }
-} */
+}
 
-/* async  */ function Home() {
-  /* const initialData: ApiResponse<TResponse> = await getInitialItems() */
-  const [initialData, setinitialData] = useState<TResponse[]>([])
+async function Home() {
+  /* const [initialData, setinitialData] = useState<TResponse[]>([]) */
 
-  useEffect(() => {
+  /* const getInitialData = useCallback(() => {
+    console.log("making initial data request")
     api.get<ApiResponse<TResponse>>("/product/initialData").then((response) => {
       setinitialData(response.data.data)
     })
   }, [])
 
+  useEffect(() => {
+    getInitialData()
+  }, [getInitialData]) */
+
+  const initialData = await getInitialData()
   return (
     <div>
       <Categories />
       <Header />
-      {initialData.map((element, index) => {
+      {initialData.data.map((element, index) => {
         if (element.category !== "") {
           return (
             <ProductSection
