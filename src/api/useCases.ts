@@ -30,6 +30,13 @@ export const useCases = {
           searchQuery,
         },
       }),
+    fullSearch: ({ searchQuery }: { searchQuery: string }) =>
+      api.get<ApiResponse<ProductWithCategory>>("/product", {
+        params: {
+          fullData: "true",
+          searchQuery,
+        },
+      }),
   },
   categories: {
     getAll: () => api.get<ApiResponse<Category>>("/category"),

@@ -20,5 +20,9 @@ export default function useSearchBar() {
     if (debounceSearch) searchProducts()
   }, [debounceSearch])
 
-  return { searchQuery, setSearchQuery, searchResult }
+  return {
+    searchQuery,
+    setSearchQuery,
+    searchResult,
+  }
 }

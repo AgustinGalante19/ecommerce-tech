@@ -4,7 +4,6 @@ import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
 import TResponse from "@/types/InitialDataResponse"
-/* import { useCallback, useEffect, useState } from "react" */
 
 async function getInitialData(): Promise<ApiResponse<TResponse>> {
   try {
@@ -12,7 +11,6 @@ async function getInitialData(): Promise<ApiResponse<TResponse>> {
       process.env.NEXT_PUBLIC_API_URL + "/product/initialData"
     )
     const response: ApiResponse<TResponse> = await request.json()
-    console.log(response)
     return response
   } catch (err) {
     console.log("error getting initialData", err)
@@ -25,19 +23,6 @@ async function getInitialData(): Promise<ApiResponse<TResponse>> {
 }
 
 async function Home() {
-  /* const [initialData, setinitialData] = useState<TResponse[]>([]) */
-
-  /* const getInitialData = useCallback(() => {
-    console.log("making initial data request")
-    api.get<ApiResponse<TResponse>>("/product/initialData").then((response) => {
-      setinitialData(response.data.data)
-    })
-  }, [])
-
-  useEffect(() => {
-    getInitialData()
-  }, [getInitialData]) */
-
   const initialData = await getInitialData()
   return (
     <div>
