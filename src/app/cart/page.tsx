@@ -1,10 +1,10 @@
 "use client"
 
 import cartStyles from "@/styles/cart.module.css"
-import Alert from "@/shared/components/Alert"
 import PucharseSummary from "@/components/Cart/PucharseSummary"
 import CartList from "@/components/Cart/CartList"
 import useCart from "@/hooks/useCart"
+import Alert from "@/components/Alert"
 
 function CartPage() {
   const {

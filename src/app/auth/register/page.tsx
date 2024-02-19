@@ -1,13 +1,13 @@
 "use client"
 
-import useErrorDialog from "@/shared/hooks/useErrorDialog"
+import useErrorDialog from "@/hooks/useErrorDialog"
 import { Button, IconButton, TextField } from "@radix-ui/themes"
 import { Eye, EyeOff, Lock, Mail, ShoppingBag } from "lucide-react"
 import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { ChangeEvent, FormEvent, useState } from "react"
 import Link from "next/link"
-import ErrorDialog from "@/shared/components/ErrorDialog"
+import ErrorDialog from "@/components/ErrorDialog"
 import axios from "axios"
 
 function Register() {

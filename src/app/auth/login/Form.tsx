@@ -5,8 +5,8 @@ import { Eye, EyeOff, Lock, Mail, ShoppingBag } from "lucide-react"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
-import useErrorDialog from "@/shared/hooks/useErrorDialog"
-import ErrorDialog from "@/shared/components/ErrorDialog"
+import useErrorDialog from "@/hooks/useErrorDialog"
+import ErrorDialog from "@/components/ErrorDialog"
 import { useRouter } from "next/navigation"
 
 function Form() {
