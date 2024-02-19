@@ -2,6 +2,7 @@
 
 import client from "@/libs/prisma"
 import randomIndex from "@/libs/randomIndex"
+import { Product } from "@prisma/client"
 
 export async function getInitialData() {
   try {
@@ -59,5 +60,104 @@ export async function getProductById(id: string) {
     return { data: [product], error: [], result: "ok" }
   } catch (err) {
     return { data: [], error: "Unexpected error", result: "error" }
+  }
+}
+
+export async function getProductByQuery(
+  query: string,
+  fullData = false
+): Promise<ApiResponse<Product | { name: string; productId: string }>> {
+  if (fullData) {
+    const products = await client.product.findMany({
+      where: {
+        OR: [
+          {
+            name: {
+              startsWith: query,
+              mode: "insensitive",
+            },
+          },
+          {
+            name: {
+              endsWith: query,
+              mode: "insensitive",
+            },
+          },
+          {
+            category: {
+              name: {
+                startsWith: query,
+                mode: "insensitive",
+              },
+            },
+          },
+          {
+            category: {
+              name: {
+                endsWith: query,
+                mode: "insensitive",
+              },
+            },
+          },
+        ],
+      },
+    })
+    return { data: products, error: [], result: "ok" }
+  }
+  const products = await client.product.findMany({
+    where: {
+      OR: [
+        {
+          name: {
+            startsWith: query,
+            mode: "insensitive",
+          },
+        },
+        {
+          name: {
+            endsWith: query,
+            mode: "insensitive",
+          },
+        },
+        {
+          category: {
+            name: {
+              startsWith: query,
+              mode: "insensitive",
+            },
+          },
+        },
+        {
+          category: {
+            name: {
+              endsWith: query,
+              mode: "insensitive",
+            },
+          },
+        },
+      ],
+    },
+    select: {
+      name: true,
+      productId: true,
+    },
+  })
+
+  return { data: products, error: [], result: "ok" }
+}
+
+export async function getProductByCatId(catId: string) {
+  const products = await client.product.findMany({
+    where: {
+      productCategoryId: catId,
+    },
+    include: {
+      category: true,
+    },
+  })
+
+  return {
+    products,
+    categoryName: products[0].category.name,
   }
 }
