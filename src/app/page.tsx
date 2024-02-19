@@ -1,32 +1,15 @@
+import { getInitialData } from "@/actions/product"
 import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
-import TResponse from "@/types/InitialDataResponse"
-
-async function getInitialData(): Promise<ApiResponse<TResponse>> {
-  try {
-    const request = await fetch(
-      process.env.NEXT_PUBLIC_API_URL + "/product/initialData"
-    )
-    const response: ApiResponse<TResponse> = await request.json()
-    return response
-  } catch (err) {
-    console.log("error getting initialData", err)
-    return {
-      data: [],
-      error: [],
-      result: "error",
-    }
-  }
-}
 
 async function Home() {
-  const initialData = await getInitialData()
+  const { categories, products } = await getInitialData()
   return (
     <div>
-      <Categories />
+      <Categories categories={categories} />
       <Header />
-      {initialData.data.map((element, index) => {
+      {products.map((element, index) => {
         if (element.category !== "") {
           return (
             <ProductSection
