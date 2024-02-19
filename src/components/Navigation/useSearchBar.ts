@@ -1,4 +1,3 @@
-import { useCases } from "@/api/useCases"
 import useDebounce from "@/hooks/useDebounce"
 import SearchResultType from "@/types/SearchResult"
 import { useEffect, useState } from "react"
@@ -11,11 +10,9 @@ export default function useSearchBar() {
 
   useEffect(() => {
     const searchProducts = async () => {
-      useCases.products
-        .search({ searchQuery: debounceSearch })
-        .then((response) => {
-          setSearchResult(response.data.data)
-        })
+      const request = await fetch("/api/product/search/" + debounceSearch)
+      const products = await request.json()
+      setSearchResult(products.data[0])
     }
     if (debounceSearch) searchProducts()
   }, [debounceSearch])

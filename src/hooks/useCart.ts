@@ -1,4 +1,4 @@
-import { useCases } from "@/api/useCases"
+import { createOrder } from "@/actions/orders"
 import { useCartStore } from "@/store/useCartStore"
 import AlertProps from "@/types/AlertProps"
 import Order, { OrderRequest } from "@/types/Order"
@@ -71,17 +71,12 @@ export default function useCart() {
       categoryId: order[itemKey].category.categoryId,
     }))
     setIsLoading(true)
-    useCases.orders
-      .create({
-        request,
-        total: totalAmount,
-        userId: sessionData?.user?.id ?? "",
-      })
+    createOrder(request, totalAmount, sessionData?.user?.id as string)
       .then((response) => {
-        if (response.data.result === "ok") {
+        if (response.result === "ok") {
           setShowAlert({
             isOpen: true,
-            message: `Order #${response.data.data[0].id}  generated successfully`,
+            message: `Order #${response.data[0].id}  generated successfully`,
             type: "success",
           })
           clearCart()
@@ -89,7 +84,7 @@ export default function useCart() {
         }
         return setShowAlert({
           isOpen: true,
-          message: response.data.error[0],
+          message: response.error[0],
           type: "error",
         })
       })

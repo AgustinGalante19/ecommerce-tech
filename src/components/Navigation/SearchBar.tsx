@@ -28,13 +28,13 @@ function SearchBar() {
               onClick={(e) => {
                 e.preventDefault()
                 if (typeof searchQuery === "string")
-                  return router.push(`/product/search?query=${searchQuery}`)
+                  return router.push(`/product/search/${searchQuery}`)
                 if (typeof searchQuery === "object") {
                   const query = searchQuery as {
                     name: string
                     productId: string
                   }
-                  return router.push(`/product/search?query=${query.name}`)
+                  return router.push(`/product/search/${query.name}`)
                 }
               }}
             >

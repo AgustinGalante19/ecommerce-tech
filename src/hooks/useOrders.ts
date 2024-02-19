@@ -1,4 +1,4 @@
-import { useCases } from "@/api/useCases"
+import { getOrders } from "@/actions/orders"
 import { OrdersWithProducts } from "@/types/Order"
 import { useSession } from "next-auth/react"
 import { useEffect, useState } from "react"
@@ -10,12 +10,8 @@ export default function useOrders() {
   useEffect(() => {
     setIsLoading(true)
     if (data?.user?.id) {
-      useCases.orders
-        .getAll(data?.user?.id)
-        .then((response) => {
-          setOrders(response.data.data)
-        })
-        .catch((err) => console.log("Cannot get orders", err))
+      getOrders(data.user.id)
+        .then((response) => setOrders(response))
         .finally(() => setIsLoading(false))
     }
   }, [data?.user?.id])
