@@ -67,6 +67,7 @@ function Form() {
               <Mail size={16} />
             </TextField.Slot>
             <TextField.Input
+              required
               placeholder='miname@mail.com'
               size='3'
               id='email'
@@ -85,6 +86,7 @@ function Form() {
               <Lock size={16} />
             </TextField.Slot>
             <TextField.Input
+              required
               id='password'
               value={formData.password}
               onChange={handleInputChange}

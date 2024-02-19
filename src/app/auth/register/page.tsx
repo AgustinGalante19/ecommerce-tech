@@ -63,6 +63,7 @@ function Register() {
               <Mail size={16} />
             </TextField.Slot>
             <TextField.Input
+              required
               placeholder='John'
               size='3'
               id='name'
@@ -81,6 +82,7 @@ function Register() {
               <Mail size={16} />
             </TextField.Slot>
             <TextField.Input
+              required
               placeholder='Doe'
               size='3'
               id='surname'
@@ -99,6 +101,7 @@ function Register() {
               <Mail size={16} />
             </TextField.Slot>
             <TextField.Input
+              required
               placeholder='miname@mail.com'
               size='3'
               id='email'
@@ -117,6 +120,7 @@ function Register() {
               <Lock size={16} />
             </TextField.Slot>
             <TextField.Input
+              required
               id='password'
               value={formData.password}
               onChange={handleInputChange}
