@@ -1,4 +1,4 @@
-import { Box, Container, Flex, Text } from "@radix-ui/themes"
+import { Box, Flex, Text } from "@radix-ui/themes"
 import Image from "next/image"
 
 function Header() {
@@ -15,7 +15,9 @@ function Header() {
             </Text>
             <br />
             <br />
-            <p className='text-7xl font-bold max-sm:text-5xl'>SMART WEARABLE.</p>
+            <p className='text-7xl font-bold max-sm:text-5xl'>
+              SMART WEARABLE.
+            </p>
             <br />
             <br />
             <Text size='6' weight='medium'>

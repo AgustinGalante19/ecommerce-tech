@@ -1,16 +1,13 @@
 "use client"
 
-import { useParams } from "next/navigation"
 import ProductList from "@/components/ProductByCategory/ProductList"
 import Header from "@/components/ProductByCategory/Header"
 import useProductByCatID from "@/hooks/useProductsByCatID"
 import ProductItemLoader from "@/components/Product/ProductItemLoader"
 
-function ProductByCategoryID() {
-  const { id } = useParams()
-
+function ProductByCategoryID({ params }: { params: { id: string } }) {
   const { categoryName, isLoading, productsData } = useProductByCatID({
-    id: id as string,
+    id: params.id as string,
   })
 
   return (
