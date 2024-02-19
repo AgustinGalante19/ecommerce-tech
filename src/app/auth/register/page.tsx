@@ -8,20 +8,14 @@ import { useRouter } from "next/navigation"
 import { ChangeEvent, FormEvent, useState } from "react"
 import Link from "next/link"
 import ErrorDialog from "@/shared/components/ErrorDialog"
-import api from "@/api"
+import axios from "axios"
 
 function Register() {
   const [isPasswordShowed, setIsPasswordShowed] = useState(false)
   const { push } = useRouter()
   const [isLoading, setIsLoading] = useState(false)
 
-  const {
-    changeContent,
-    closeErrorDialog,
-    content,
-    isErrorDialogOpen,
-    openErrorDialog,
-  } = useErrorDialog()
+  const { closeErrorDialog, content, isErrorDialogOpen } = useErrorDialog()
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -32,7 +26,7 @@ function Register() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     setIsLoading(true)
     e.preventDefault()
-    api.post<ApiResponse<boolean>>("/auth/register", formData).then((res) => {
+    axios.post<ApiResponse<boolean>>("/auth/register", formData).then((res) => {
       if (res.data.result === "ok") {
         signIn("credentials", {
           ...formData,
