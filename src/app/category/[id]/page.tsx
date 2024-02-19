@@ -1,24 +1,15 @@
-"use client"
-
 import ProductList from "@/components/ProductByCategory/ProductList"
 import Header from "@/components/ProductByCategory/Header"
-import useProductByCatID from "@/hooks/useProductsByCatID"
-import ProductItemLoader from "@/components/Product/ProductItemLoader"
+import { getProductByCatId } from "@/actions/product"
 
-function ProductByCategoryID({ params }: { params: { id: string } }) {
-  const { categoryName, isLoading, productsData } = useProductByCatID({
-    id: params.id as string,
-  })
+async function ProductByCategoryID({ params }: { params: { id: string } }) {
+  const { categoryName, products } = await getProductByCatId(params.id)
 
   return (
     <div className='mb-8'>
-      <Header categoryName={categoryName} isLoading={isLoading} />
+      <Header categoryName={categoryName} isLoading={false} />
       <div className='bg-offwhite'>
-        {isLoading ? (
-          <ProductItemLoader />
-        ) : (
-          <ProductList products={productsData} />
-        )}
+        <ProductList products={products} />
       </div>
     </div>
   )
