@@ -1,5 +1,3 @@
-/* import api from "@/api" */
-import api from "@/api"
 import Categories from "@/components/Categories"
 import Header from "@/components/Header"
 import ProductSection from "@/components/ProductSection"
