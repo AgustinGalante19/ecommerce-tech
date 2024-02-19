@@ -1,63 +1,43 @@
-import { Box, Container, Flex, Separator } from "@radix-ui/themes"
+import { Container, Flex, Separator } from "@radix-ui/themes"
 import { Github, Mail } from "lucide-react"
 import Link from "next/link"
 
-const linkStyle = "text-white font-semibold"
-
-const Links = [
-  {
-    id: 1,
-    label: "About Us",
-    href: "#",
-  },
-  {
-    id: 2,
-    label: "Terms & Conditions",
-    href: "#",
-  },
-  {
-    id: 3,
-    label: "FAQ",
-    href: "#",
-  },
-  {
-    id: 4,
-    label: "Privacy Policy",
-    href: "#",
-  },
-]
-const colStyle = "my-4"
+const linkStyles =
+  " text-white font-semibold hover:text-gray-300 transition-colors"
 
 function Footer() {
   return (
     <footer className='bg-primary'>
       <Container>
-        <div>
+        <div className='p-4'>
           <Flex gap='9' justify='center' wrap='wrap'>
-            <Box className={colStyle}>
-              <p className='text-4xl font-semibold text-white '>
-                Tech-Ecommerce
-              </p>
-              <Flex align='center' justify='center' gap='2'>
-                <Mail size={16} color='#fff' />
-                <span className='text-white'>agustin.19.galante@gmail.com</span>
-              </Flex>
-            </Box>
+            <p className='text-4xl font-semibold text-white '>Tech-Ecommerce</p>
           </Flex>
         </div>
         <Separator orientation='horizontal' size='4' />
-        <Link
-          className='text-secondary text-center font-semibold hover:text-white transition-colors'
-          href='https://github.com/AgustinGalante19'
-          target='_blank'
-        >
-          <Flex align='center' justify='center' my='2'>
-            <div>
-              <Github />
-            </div>
-            <span>Agustin Galante</span>
-          </Flex>
-        </Link>
+        <Flex p='2' justify='center' align='center' gap='2'>
+          <Link
+            className={linkStyles}
+            href='https://github.com/AgustinGalante19'
+            target='_blank'
+          >
+            <Github />
+          </Link>
+          <Link
+            className={linkStyles}
+            href='https://agustin-galante.netlify.app/'
+            target='_blank'
+          >
+            Portfolio
+          </Link>
+          <Link
+            className={linkStyles}
+            href='mailto:agustin.galante.19@outlook.es'
+            target='_blank'
+          >
+            <Mail />
+          </Link>
+        </Flex>
       </Container>
     </footer>
   )
