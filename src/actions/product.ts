@@ -155,9 +155,14 @@ export async function getProductByCatId(catId: string) {
       category: true,
     },
   })
+  const currentCategory = await client.category.findFirst({
+    where: {
+      categoryId: catId,
+    },
+  })
 
   return {
     products,
-    categoryName: products[0].category.name,
+    categoryName: currentCategory?.name,
   }
 }

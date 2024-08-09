@@ -7,9 +7,20 @@ async function ProductByCategoryID({ params }: { params: { id: string } }) {
 
   return (
     <div className='mb-8'>
-      <Header categoryName={categoryName} isLoading={false} />
+      <Header
+        categoryName={categoryName ?? "Category not found"}
+        isLoading={false}
+      />
       <div className='bg-offwhite'>
-        <ProductList products={products} />
+        {products.length === 0 ? (
+          <div className='flex p-8 justify-center'>
+            <span className='text-xl font-semibold text-gray-400'>
+              Products not found :{"("}
+            </span>
+          </div>
+        ) : (
+          <ProductList products={products} />
+        )}
       </div>
     </div>
   )
