@@ -26,18 +26,20 @@ function Register() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     setIsLoading(true)
     e.preventDefault()
-    axios.post<ApiResponse<boolean>>("/auth/register", formData).then((res) => {
-      if (res.data.result === "ok") {
-        signIn("credentials", {
-          ...formData,
-          redirect: false,
-        }).then((authRes) => {
-          if (authRes?.ok) {
-            push("/")
-          }
-        })
-      }
-    })
+    axios
+      .post<ApiResponse<boolean>>("/api/auth/register", formData)
+      .then((res) => {
+        if (res.data.result === "ok") {
+          signIn("credentials", {
+            ...formData,
+            redirect: false,
+          }).then((authRes) => {
+            if (authRes?.ok) {
+              push("/")
+            }
+          })
+        }
+      })
   }
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
