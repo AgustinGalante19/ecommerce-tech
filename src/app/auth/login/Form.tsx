@@ -1,7 +1,7 @@
 "use client"
 
 import { Button, IconButton, TextField } from "@radix-ui/themes"
-import { Eye, EyeOff, Lock, Mail, ShoppingBag } from "lucide-react"
+import { Eye, EyeOff, Info, Lock, Mail, ShoppingBag } from "lucide-react"
 import { ChangeEvent, FormEvent, useState } from "react"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
@@ -13,7 +13,7 @@ function Form() {
   const [isLoading, setIsLoading] = useState(false)
   const [isPasswordShowed, setIsPasswordShowed] = useState(false)
   const { push } = useRouter()
-
+  const [open, setOpen] = useState(false)
   const {
     changeContent,
     closeErrorDialog,
@@ -125,6 +125,22 @@ function Form() {
             Login
           </Button>
         </div>
+        <div className='mt-2 ml-2'>
+          <Button
+            variant='ghost'
+            onClick={() => setOpen((open) => !open)}
+            type='button'
+            /* className='flex items-center' */
+          >
+            <Info size={18} /> Show test user
+          </Button>
+        </div>
+        {open && (
+          <div className='flex flex-col gap-2'>
+            <span>testuser@mail.com</span>
+            <span>TestUser123#</span>
+          </div>
+        )}
       </form>
       <ErrorDialog
         closeAlert={closeErrorDialog}
