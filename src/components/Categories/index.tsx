@@ -6,7 +6,7 @@ import { Category } from "@prisma/client"
 
 function Categories({ categories }: { categories: Category[] }) {
   return (
-    <div className='py-4 border-b border-[#EDEDED]'>
+    <div className='py-4 max-sm:px-4 border-b border-[#EDEDED]'>
       <Container>
         <Flex gap='4' wrap='wrap'>
           {categories.map((cat) => (

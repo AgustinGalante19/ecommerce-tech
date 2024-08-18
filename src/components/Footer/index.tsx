@@ -11,7 +11,9 @@ function Footer() {
       <Container>
         <div className='p-4'>
           <Flex gap='9' justify='center' wrap='wrap'>
-            <p className='text-4xl font-semibold text-white '>Tech-Ecommerce</p>
+            <p className='text-4xl max-sm:text-2xl text-center font-semibold text-white '>
+              Tech-Ecommerce
+            </p>
           </Flex>
         </div>
         <Separator orientation='horizontal' size='4' />
